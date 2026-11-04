@@ -1,0 +1,16 @@
+# COMP9417 26T3 project: the library versions used in marking (Python 3.11).
+# Install into a NEW virtual environment (see README.md):  python -m pip install -r requirements.txt
+# PyTorch is installed separately (see README.md, step 1).
+numpy==2.4.6
+pandas==3.1.0
+scipy==1.17.1
+scikit-learn==1.9.1
+xgboost==3.2.0
+lightgbm==4.7.0
+statsmodels==0.15.0
+pyarrow==26.0.0
+joblib==1.6.0
+holidays==0.107
+# Not used in marking; for the starter notebook:
+matplotlib
+notebook
