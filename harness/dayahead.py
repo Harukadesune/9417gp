@@ -1,9 +1,5 @@
-"""Shared helpers for the day-ahead task: day boundaries, inputs, targets, baselines, metrics.
-
-Day convention: each timestamp marks the END of a half-hour interval (market time,
-AEST, UTC+10, no daylight saving). Day D therefore consists of the 48 intervals
-stamped D 00:30, D 01:00, ..., D 23:30 and (D+1) 00:00.
-"""
+"""官方日前任务辅助函数：定义市场日、输入、标签、基线与指标。
+时间戳表示半小时区间结束时刻；市场日从当天 00:30 至次日 00:00，共四十八个时段。"""
 import numpy as np
 import pandas as pd
 
@@ -18,7 +14,7 @@ def load_dataset(path):
 
 
 def market_day(index):
-    """Calendar day each interval belongs to (interval start date)."""
+    """返回各半小时区间所属的市场日，即该区间开始时刻的日期。"""
     return (index - pd.Timedelta("30min")).normalize()
 
 
@@ -29,7 +25,7 @@ def complete_days(df):
 
 
 def make_inputs(df, target_day):
-    """Inputs exactly as the marking runner builds them for predicting target_day."""
+    """按官方评测方式，为目标日生成历史市场数据和次日天气输入。"""
     target_day = pd.Timestamp(target_day)
     days = market_day(df.index)
     history = df[days < target_day]
@@ -38,7 +34,7 @@ def make_inputs(df, target_day):
 
 
 def targets(df, target_day):
-    """True demand and price direction for target_day."""
+    """生成目标日的真实需求，以及价格是否严格高于前一市场日均价的标签。"""
     target_day = pd.Timestamp(target_day)
     days = market_day(df.index)
     today = df[days == target_day]
@@ -48,10 +44,8 @@ def targets(df, target_day):
 
 
 def baseline(history, weather_next, lag_days=1):
-    """Same half-hour lag_days before the target day (day D for lag 1, day D-6 for lag 7).
-
-    Demand: that half-hour's demand. Price direction: 1 if that half-hour's price is above
-    the mean price of day D (the same threshold as the target)."""
+    """取目标日前 lag_days 天的同时段作为基线。
+需求直接使用该时段需求；价格方向比较该时段价格与目标日前一天均价，两个基线使用相同阈值。"""
     days = market_day(history.index)
     last_day = days.max()
     src_day = last_day - pd.Timedelta(f"{lag_days - 1}D")
@@ -72,8 +66,7 @@ def mae(y, yhat):
 
 
 def balanced_accuracy(y, yhat):
-    """Mean recall over the classes present in y (if only one class is present,
-    this is the recall of that class)."""
+    """计算真实标签中各个已出现类别召回率的平均值；只有一个类别时返回该类别召回率。"""
     y, yhat = np.asarray(y, int), np.asarray(yhat, int)
     recalls = [np.mean(yhat[y == c] == c) for c in (0, 1) if np.any(y == c)]
     return float(np.mean(recalls) * 100)

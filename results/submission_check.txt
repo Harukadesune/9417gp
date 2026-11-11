@@ -1,0 +1,26 @@
+Package found at /var/folders/98/44n_mnx513s57z0s0f_87mr40000gn/T/c9417check_0xwjsjjp/pkg
+
+2026-10-18  ok    init   1.2s  predict   0.1s
+2026-10-19  ok    init   0.9s  predict   0.1s
+2026-10-20  ok    init   0.9s  predict   0.1s
+2026-10-21  ok    init   1.0s  predict   0.1s
+2026-10-22  ok    init   0.9s  predict   0.1s
+2026-10-23  ok    init   0.9s  predict   0.1s
+2026-10-24  ok    init   0.9s  predict   0.1s
+2026-10-25  ok    init   0.9s  predict   0.1s
+2026-10-26  ok    init   0.9s  predict   0.1s
+2026-10-27  ok    init   1.2s  predict   0.1s
+2026-10-28  ok    init   0.9s  predict   0.1s
+2026-10-29  ok    init   0.9s  predict   0.1s
+2026-10-30  ok    init   1.5s  predict   0.1s
+2026-10-31  ok    init   1.0s  predict   0.1s
+
+Scores:
+(in-sample if your models were trained on these days: they check that the package
+ runs, not how it will perform in the live week)
+                              MAPE %   MAE MW  BalAcc %   Acc %
+Your package                    3.96    227.2      84.6    84.5
+Same half-hour yesterday        7.12    415.3      78.0    78.1
+Same half-hour last week        9.95    556.2      73.2    73.5
+
+All days ran successfully.

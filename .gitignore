@@ -1,0 +1,17 @@
+# Local Python environments and generated caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store
+.idea/
+.vscode/
+previous_submission_backup/
+# Local secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key

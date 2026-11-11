@@ -1,0 +1,6 @@
+Matplotlib is building the font cache; this may take a moment.
+/Users/haruka/Documents/Codex/2026-11-08/x/outputs/comp9417_project/make_figures.py:110: Pandas4Warning: Series.dt.dayofweek is deprecated and will be removed in a future version. Use Series.dt.day_of_week instead.
+  weekend_fraction=float((train_days.dt.dayofweek>=5).mean()),
+/Users/haruka/Documents/Codex/2026-11-08/x/outputs/comp9417_project/make_figures.py:110: Pandas4Warning: Series.dt.dayofweek is deprecated and will be removed in a future version. Use Series.dt.day_of_week instead.
+  weekend_fraction=float((train_days.dt.dayofweek>=5).mean()),
+Created 8 figures (PNG + SVG), individually cropped panels, and diagnostic tables.

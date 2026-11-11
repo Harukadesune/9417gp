@@ -1,14 +1,7 @@
-"""Run one group's Forecaster for one target day.
-
-This is the exact wrapper used in marking. It loads the package, calls
-Forecaster.predict once, checks the output and writes a JSON result.
-It never raises: every failure is recorded in the JSON as an error.
-
-Usage:
-    python run_day.py --package DIR --input DIR --output FILE
-
---input must contain history.parquet and weather_next.parquet.
-"""
+"""在独立进程中运行某个目标日的 Forecaster，并校验输出。
+该包装器与评分使用的接口一致；初始化限时六十秒，预测限时二十秒，失败写入结果 JSON。
+用法：python run_day.py --package DIR --input DIR --output FILE
+输入目录须包含 history.parquet 和 weather_next.parquet。"""
 import argparse
 import json
 import math
@@ -29,8 +22,8 @@ class TimeLimit(Exception):
     pass
 
 
-# Unix (and the marking server) interrupt slow code with SIGALRM. Windows has no SIGALRM,
-# so there the call runs in a worker thread and the wrapper stops waiting at the limit.
+# 在 Unix 和评分服务器上使用 SIGALRM 中断超时代码；Windows 没有该信号，
+# 因此在 Windows 上使用工作线程，并在达到时限后停止等待。
 USE_SIGNAL = hasattr(signal, "SIGALRM")
 
 
@@ -65,7 +58,7 @@ def _run_with_limit(seconds, fn, *args):
 
 
 def validate(pred, expected_index):
-    """Return (clean predictions as lists, None) or (None, error message)."""
+    """校验预测的行数、索引、列、数值范围和类别；返回清洗后的列表或错误信息。"""
     import numpy as np
     import pandas as pd
 
@@ -107,7 +100,7 @@ def main():
 
         result["stage"] = "import"
         sys.path.insert(0, args.package)
-        import model  # the group's model.py
+        import model  # 小组提交的模型模块
 
         result["stage"] = "init"
         t0 = time.time()
@@ -131,7 +124,7 @@ def main():
     except TimeLimit:
         limit = INIT_LIMIT_S if result["stage"] == "init" else PREDICT_LIMIT_S
         result["error"] = f"time limit of {limit} s exceeded during {result['stage']}"
-    except BaseException as exc:  # includes SystemExit and KeyboardInterrupt from student code
+    except BaseException as exc:  # 同时捕获提交代码引发的退出和键盘中断异常
         tb = traceback.format_exc(limit=5)
         result["error"] = f"{type(exc).__name__}: {exc}\n{tb[-2000:]}"
 
@@ -139,7 +132,7 @@ def main():
         json.dump(result, fh, default=lambda o: None if isinstance(o, float) and math.isnan(o) else str(o))
     sys.stdout.flush()
     sys.stderr.flush()
-    os._exit(0)      # do not wait for a timed-out worker thread
+    os._exit(0)      # 不再等待已经超时的工作线程
 
 
 if __name__ == "__main__":

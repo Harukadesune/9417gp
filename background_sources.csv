@@ -1,0 +1,7 @@
+topic,title,url,use
+algorithm,HistGradientBoostingRegressor,https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingRegressor.html,Implementation reference
+algorithm,HistGradientBoostingClassifier,https://scikit-learn.org/stable/modules/generated/sklearn.ensemble.HistGradientBoostingClassifier.html,Implementation reference
+algorithm,Ridge,https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.Ridge.html,Implementation reference
+algorithm,LogisticRegression,https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.LogisticRegression.html,Implementation reference
+event,AEMO suspends NEM Wholesale Market 15 June 2022,https://www.aemo.com.au/newsroom/media-release/aemo-suspends-nem-wholesale-market,Background only; temporal coincidence is not causation
+event,AGL Liddell closes 28 April 2023,https://www.agl.com.au/about-agl/news-centre/2023/april/agls-liddell-power-station-closes-after-52-years-of-operation,Background only; no external training data

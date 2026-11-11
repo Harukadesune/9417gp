@@ -1,0 +1,3 @@
+demand {'family': 'tree', 'param': 31, 'threshold': 0.5, 'strategy': 'periodic_expanding', 'window_days': 0} training rows 294432
+price {'family': 'tree', 'param': 31, 'threshold': 0.5499999999999999, 'strategy': 'periodic_expanding', 'window_days': 0} training rows 294432
+Saved /Users/haruka/Documents/Codex/2026-11-08/x/outputs/comp9417_project/package/artifacts

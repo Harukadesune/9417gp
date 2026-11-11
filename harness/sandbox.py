@@ -1,4 +1,4 @@
-"""How a package is run for one day: locally (for quick checks) or in the marking sandbox."""
+"""在本地或受限评分沙箱中运行单日预测，并对模型压缩包作安全检查。"""
 import json
 import os
 import shutil
@@ -9,13 +9,13 @@ import zipfile
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 IMAGE = "comp9417-26t3"
-HARD_TIMEOUT_S = 120          # whole container: start, imports, init (60 s) and predict (20 s)
+HARD_TIMEOUT_S = 120          # 整个容器的时限，包含启动、导入、初始化六十秒和预测二十秒
 MAX_PACKAGE_MB = 100
 MAX_UNZIPPED_MB = 200
 
 
 def docker_cmd(package_dir, input_dir, output_dir, name, image=IMAGE):
-    """The marking sandbox: no network, read-only root, small /tmp, non-root, limited resources."""
+    """构造评分沙箱命令：禁用网络、根目录只读、仅临时目录可写，并限制用户权限和资源。"""
     return [
         "docker", "run", "--rm", "--name", name,
         "--network", "none",
@@ -33,10 +33,10 @@ def docker_cmd(package_dir, input_dir, output_dir, name, image=IMAGE):
 
 
 def run_one_day(package_dir, input_dir, work_dir, use_docker, image=IMAGE):
-    """Run the package for one day. Always returns a result dict; never raises."""
+    """运行模型包的一天预测；总是返回结果字典，将失败记录为错误状态。"""
     out_dir = os.path.join(work_dir, "out_" + uuid.uuid4().hex[:8])
     os.makedirs(out_dir)
-    os.chmod(out_dir, 0o777)                     # writable by the sandbox's nobody user
+    os.chmod(out_dir, 0o777)                     # 允许沙箱中的低权限用户写入
     result_path = os.path.join(out_dir, "result.json")
     if use_docker:
         name = "c9417-" + uuid.uuid4().hex[:12]
@@ -69,7 +69,7 @@ def run_one_day(package_dir, input_dir, work_dir, use_docker, image=IMAGE):
 
 
 def recheck(res):
-    """Re-validate a result outside the sandbox: the file was written by untrusted code."""
+    """在沙箱外再次校验输出，避免直接信任提交代码写出的结果。"""
     import math
     if not isinstance(res, dict) or res.get("status") != "ok":
         return res if isinstance(res, dict) else {"status": "error", "stage": "sandbox",
@@ -90,11 +90,8 @@ def recheck(res):
 
 
 def safe_extract(zip_path, dest):
-    """Extract a submission zip safely.
-
-    Accepts zips made on Windows (backslash separators), macOS (__MACOSX entries) and Linux.
-    Refuses absolute paths, '..', symbolic links and content above MAX_UNZIPPED_MB.
-    """
+    """安全解压模型包。兼容不同系统的路径分隔符，忽略 macOS 元数据。
+拒绝绝对路径、父目录跳转、符号链接以及超过解压大小限制的内容。"""
     total = 0
     os.makedirs(dest, exist_ok=True)
     root = os.path.realpath(dest)
@@ -127,7 +124,7 @@ def safe_extract(zip_path, dest):
 
 
 def find_package_root(folder):
-    """model.py at the top level, or inside a single top-level folder."""
+    """寻找顶层 model.py，或唯一顶层文件夹中的 model.py。"""
     if os.path.isfile(os.path.join(folder, "model.py")):
         return folder
     entries = [e for e in os.listdir(folder) if not e.startswith(("__MACOSX", "."))]

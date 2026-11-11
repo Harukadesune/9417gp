@@ -1,0 +1,26 @@
+{
+  "seed": 9417,
+  "numpy": "2.4.6",
+  "pandas": "3.1.0",
+  "sklearn": "1.9.1",
+  "data_sha256": "c13711002906140eaf7cc67c1ce17a49facd359cf3d1a84722aaa3ccd647752c",
+  "last_market_day": "2026-10-31",
+  "settings": {
+    "demand": {
+      "family": "tree",
+      "param": 31,
+      "threshold": 0.5,
+      "strategy": "periodic_expanding",
+      "window_days": 0
+    },
+    "price": {
+      "family": "tree",
+      "param": 31,
+      "threshold": 0.5499999999999999,
+      "strategy": "periodic_expanding",
+      "window_days": 0
+    }
+  },
+  "training_seconds": 65.61,
+  "peak_memory_mb": 1460.0
+}

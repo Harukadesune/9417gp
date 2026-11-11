@@ -1,13 +1,7 @@
-"""Check a model package before you submit it.
-
-Runs your package for the last 14 complete days of the dataset, one day at a time, with
-the same wrapper, time limits and output checks used in marking, and compares the result
-with the two baselines. In marking, at most one failed day is tolerated (with a 2-mark penalty).
-
-Usage (from the kit's folder, with your environment activated):
-    python check_submission.py submission.zip
-    python check_submission.py example_package       # a folder also works
-"""
+"""提交前检查模型文件夹或 zip，逐日运行数据集最后十四个完整市场日。
+使用官方包装器、时限和输出校验，并比较两种基线。
+用法：python check_submission.py submission.zip 或 python check_submission.py example_package。
+正式评测中一天失败扣两分，超过一天失败则没有实时评测分。"""
 import argparse
 import os
 import sys
@@ -26,7 +20,7 @@ def main():
     ap.add_argument("package", help="submission.zip or a package folder")
     ap.add_argument("--data", default=DEFAULT_DATA)
     ap.add_argument("--days", type=int, default=14)
-    ap.add_argument("--docker", action="store_true", help=argparse.SUPPRESS)  # staff only
+    ap.add_argument("--docker", action="store_true", help=argparse.SUPPRESS)  # 仅供教学人员使用
     args = ap.parse_args()
 
     import pandas as pd

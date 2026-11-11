@@ -1,0 +1,40 @@
+{
+  "demand": {
+    "linear": {
+      "task": "demand",
+      "family": "linear",
+      "param": 1000.0,
+      "threshold": 0.5,
+      "MAPE": 2.932158599980782,
+      "MAE": 229.89154328312287
+    },
+    "tree": {
+      "task": "demand",
+      "family": "tree",
+      "param": 31,
+      "threshold": 0.5,
+      "MAPE": 2.401711274450172,
+      "MAE": 191.1980880243594
+    },
+    "selected": "tree"
+  },
+  "price": {
+    "linear": {
+      "task": "price",
+      "family": "linear",
+      "param": 0.01,
+      "threshold": 0.575,
+      "Acc": 77.30593607305936,
+      "BalAcc": 77.3192330536137
+    },
+    "tree": {
+      "task": "price",
+      "family": "tree",
+      "param": 31,
+      "threshold": 0.5499999999999999,
+      "Acc": 81.4041095890411,
+      "BalAcc": 81.45571179182801
+    },
+    "selected": "tree"
+  }
+}

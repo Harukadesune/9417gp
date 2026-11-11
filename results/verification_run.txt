@@ -1,0 +1,23 @@
+{
+  "status": "pass",
+  "checks": [
+    "All classification labels exactly match per-day Series.mean threshold semantics",
+    "2014-01-01: feature parity, future poisoning, target parity, stateless API OK",
+    "2020-02-29: feature parity, future poisoning, target parity, stateless API OK",
+    "2026-10-31: feature parity, future poisoning, target parity, stateless API OK",
+    "All task/strategy retraining counts <=6; training ends before deployment",
+    "Both baselines: original float64 precision across all simulation rows; exact harness parity on three dates",
+    "Every model/task: 142 simulation months; finite IID and day-bootstrap intervals",
+    "Artifacts trained with required NumPy/pandas/scikit-learn versions"
+  ],
+  "retraining_counts": {
+    "('demand', 'drift_error')": 6,
+    "('demand', 'drift_input')": 6,
+    "('demand', 'periodic_expanding')": 6,
+    "('demand', 'periodic_window')": 6,
+    "('price', 'drift_error')": 5,
+    "('price', 'drift_input')": 6,
+    "('price', 'periodic_expanding')": 6,
+    "('price', 'periodic_window')": 6
+  }
+}

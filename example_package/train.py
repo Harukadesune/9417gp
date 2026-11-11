@@ -1,12 +1,5 @@
-"""Rebuild artifacts/ for the example package from the released CSV only.
-
-Usage (from the kit's root folder):
-    python example_package/train.py data/nem_weather_halfhourly_2010_2026.csv
-
-The moving average has nothing to fit, so this script only checks that the file can be read
-and writes the window length to artifacts/config.json. Your train.py must fit your models
-here, using only the released CSV, and save them in artifacts/.
-"""
+"""仅使用发布的 CSV 重建示例包的 artifacts 目录。
+用法：python example_package/train.py data/nem_weather_halfhourly_2010_2026.csv。"""
 import json
 import os
 import sys

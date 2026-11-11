@@ -1,0 +1,42 @@
+15:32:13 features
+15:32:14 validation {'task': 'demand', 'family': 'linear', 'param': 10.0, 'threshold': 0.5, 'MAPE': 2.9838757050603326, 'MAE': 233.5293477342858}
+15:32:14 validation {'task': 'demand', 'family': 'linear', 'param': 1000.0, 'threshold': 0.5, 'MAPE': 2.932158599980782, 'MAE': 229.89154328312287}
+15:32:21 validation {'task': 'demand', 'family': 'tree', 'param': 15, 'threshold': 0.5, 'MAPE': 2.550113390979996, 'MAE': 202.39234817068925}
+15:32:29 validation {'task': 'demand', 'family': 'tree', 'param': 31, 'threshold': 0.5, 'MAPE': 2.401711274450172, 'MAE': 191.1980880243594}
+15:32:39 validation {'task': 'price', 'family': 'linear', 'param': 0.01, 'threshold': 0.575, 'Acc': 77.30593607305936, 'BalAcc': 77.3192330536137}
+15:32:41 validation {'task': 'price', 'family': 'linear', 'param': 1.0, 'threshold': 0.575, 'Acc': 77.25456621004567, 'BalAcc': 77.27521021617258}
+15:32:48 validation {'task': 'price', 'family': 'tree', 'param': 15, 'threshold': 0.5499999999999999, 'Acc': 81.2728310502283, 'BalAcc': 81.30626184548706}
+15:32:57 validation {'task': 'price', 'family': 'tree', 'param': 31, 'threshold': 0.5499999999999999, 'Acc': 81.4041095890411, 'BalAcc': 81.45571179182801}
+15:33:07 day types
+15:33:08 reuse completed demand simulation periodic_expanding
+15:33:09 reuse completed demand simulation periodic_window
+15:33:09 reuse completed demand simulation drift_error
+15:33:09 reuse completed demand simulation drift_input
+15:33:10 simulate price periodic_expanding tree
+15:33:24 refit price periodic_expanding 2016-01-01 1
+15:33:40 refit price periodic_expanding 2018-01-01 2
+15:33:59 refit price periodic_expanding 2020-01-01 3
+15:34:24 refit price periodic_expanding 2022-01-01 4
+15:34:52 refit price periodic_expanding 2024-01-01 5
+15:35:24 refit price periodic_expanding 2026-01-01 6
+15:35:25 simulate price periodic_window tree
+15:35:31 refit price periodic_window 2016-01-01 1
+15:35:36 refit price periodic_window 2018-01-01 2
+15:35:41 refit price periodic_window 2020-01-01 3
+15:35:46 refit price periodic_window 2022-01-01 4
+15:35:51 refit price periodic_window 2024-01-01 5
+15:35:56 refit price periodic_window 2026-01-01 6
+15:35:56 simulate price drift_error tree
+15:36:02 refit price drift_error 2015-09-20 1
+15:36:07 refit price drift_error 2016-09-25 2
+15:36:13 refit price drift_error 2017-10-11 3
+15:36:18 refit price drift_error 2019-12-19 4
+15:36:23 refit price drift_error 2021-03-01 5
+15:36:23 simulate price drift_input tree
+15:36:29 refit price drift_input 2015-07-21 1
+15:36:35 refit price drift_input 2016-10-20 2
+15:36:40 refit price drift_input 2017-10-20 3
+15:36:45 refit price drift_input 2018-11-24 4
+15:36:50 refit price drift_input 2019-11-24 5
+15:36:55 refit price drift_input 2020-11-23 6
+15:37:22 complete {'demand': {'family': 'tree', 'param': 31, 'threshold': 0.5, 'strategy': 'periodic_expanding', 'window_days': 0}, 'price': {'family': 'tree', 'param': 31, 'threshold': 0.5499999999999999, 'strategy': 'periodic_expanding', 'window_days': 0}}
